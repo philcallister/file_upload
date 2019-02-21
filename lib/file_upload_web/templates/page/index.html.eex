@@ -1,0 +1,24 @@
+<section class="phx-hero">
+  <h1><%= gettext "Welcome to %{name}!", name: "File Upload" %></h1>
+  <p>A productive uploader that<br/>does not compromise uploading.</p>
+</section>
+
+<%= if @img_url do %>
+  <img src="<%= @img_url %>" class="avatar" alt="Avatar" height="50" width="50">
+<% end %>
+
+<section>
+  <%= form_for @changeset, Routes.page_path(@conn, :upload), [multipart: true], fn f -> %>
+    <div class="form-group">
+      <label>User ID</label>
+      <%= text_input f, :id, class: "form-control" %>
+
+      <label>File Upload</label>
+      <%= file_input f, :avatar, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= submit "Submit", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</section>
