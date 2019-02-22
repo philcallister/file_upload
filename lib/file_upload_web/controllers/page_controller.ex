@@ -20,6 +20,7 @@ defmodule FileUploadWeb.PageController do
 
   def upload(conn, %{"user" => %{"avatar" => avatar_params, "id" => id}}) do
     user = Accounts.get_user!(id)
+    delete_existing_avatar(user)
     Accounts.update_user(user, %{avatar: avatar_params})
     conn
     |> put_flash(:info, "User uploaded successfully.")
@@ -28,6 +29,12 @@ defmodule FileUploadWeb.PageController do
 
   def upload(_, _) do
     {:error, "Bad parameters given"}
+  end
+
+  defp delete_existing_avatar(user) do
+    if user.avatar do
+      Avatar.delete({user.avatar, user})
+    end
   end
 
 end
