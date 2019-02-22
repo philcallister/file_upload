@@ -7,7 +7,7 @@ defmodule FileUploadWeb.FallbackController do
     conn
     |> put_flash(:error, "That was bad.")
     |> put_view(FileUploadWeb.PageView)
-    |> render("index.html", changeset: changeset, img_url: nil)
+    |> render("index.html", changeset: changeset, name: nil, img_url: nil)
   end
 
 end

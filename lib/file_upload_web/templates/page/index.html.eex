@@ -4,7 +4,12 @@
 </section>
 
 <%= if @img_url do %>
-  <img src="<%= @img_url %>" class="avatar" alt="Avatar" height="50" width="50">
+  <section class="phx-hero">
+    <%= if @user do %>
+      <h2><%= @user.name %>&nbsp;(<%= @user.age %>)</h2>
+    <% end %>
+    <img src="<%= @img_url %>" class="avatar" alt="Avatar" height="125" width="125">
+  </section>
 <% end %>
 
 <section>

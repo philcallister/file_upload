@@ -10,12 +10,12 @@ defmodule FileUploadWeb.PageController do
     user = Accounts.get_user!(id)
     img_url = Avatar.url({user.avatar, user}) |> String.replace_prefix("/priv/static", "")
     changeset = User.changeset(%User{})
-    render(conn, "index.html", changeset: changeset, img_url: img_url)
+    render(conn, "index.html", changeset: changeset, user: user, img_url: img_url)
   end
 
   def index(conn, _params) do
     changeset = User.changeset(%User{})
-    render(conn, "index.html", changeset: changeset, img_url: nil)
+    render(conn, "index.html", changeset: changeset, user: nil, img_url: nil)
   end
 
   def upload(conn, %{"user" => %{"avatar" => avatar_params, "id" => id}}) do
