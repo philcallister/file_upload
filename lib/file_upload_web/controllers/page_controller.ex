@@ -4,6 +4,8 @@ defmodule FileUploadWeb.PageController do
   alias FileUpload.Accounts
   alias FileUpload.Accounts.User
 
+  action_fallback FileUploadWeb.FallbackController
+
   def index(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
     img_url = Avatar.url({user.avatar, user}) |> String.replace_prefix("/priv/static", "")
@@ -22,6 +24,10 @@ defmodule FileUploadWeb.PageController do
     conn
     |> put_flash(:info, "User uploaded successfully.")
     |> redirect(to: Routes.page_path(conn, :index, id: user.id))
+  end
+
+  def upload(_, _) do
+    {:error, "Bad parameters given"}
   end
 
 end
